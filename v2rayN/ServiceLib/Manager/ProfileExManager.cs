@@ -132,6 +132,11 @@ public class ProfileExManager
         IndexIdEnqueue(indexId);
     }
 
+    public int GetTestDelay(string? indexId)
+    {
+        return _lstProfileEx.FirstOrDefault(t => t.IndexId == indexId)?.Delay ?? 0;
+    }
+
     public void SetTestSpeed(string indexId, decimal speed)
     {
         var profileEx = GetProfileExItem(indexId);

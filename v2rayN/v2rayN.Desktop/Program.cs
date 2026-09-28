@@ -69,8 +69,9 @@ internal class Program
 
         if (OperatingSystem.IsMacOS())
         {
-            var showInDock = Design.IsDesignMode || AppManager.Instance.Config.UiItem.MacOSShowInDock;
-            builder = builder.With(new MacOSPlatformOptions { ShowInDock = showInDock });
+            // Tray-only (accessory) mode left the app with neither a Dock icon nor a
+            // reachable window, so macOS always runs as a regular app with a Dock icon.
+            builder = builder.With(new MacOSPlatformOptions { ShowInDock = true });
         }
 
         return builder;

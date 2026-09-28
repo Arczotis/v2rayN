@@ -6,7 +6,7 @@ using v2rayN.Desktop.Manager;
 
 namespace v2rayN.Desktop.Views;
 
-public partial class MainWindow : WindowBase<MainWindowViewModel>
+public partial class MainWindow : WindowBase<MainWindowViewModel>, IMainWindowView
 {
     private static Config _config;
     private readonly SingleReplaceableDisposable _layoutBindingsDisposable = new();

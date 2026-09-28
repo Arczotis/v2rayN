@@ -66,9 +66,14 @@ public partial class StatusBarView : ReactiveUserControl<StatusBarViewModel>
         if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow.Icon = AvaUtils.GetAppIcon(_config.SystemProxyItem.SysProxyType);
+
+            // On macOS the menu-bar item is owned natively (see MacStatusBar); there is no Avalonia tray icon.
             var iconslist = TrayIcon.GetIcons(Application.Current);
-            iconslist[0].Icon = desktop.MainWindow.Icon;
-            TrayIcon.SetIcons(Application.Current, iconslist);
+            if (iconslist is { Count: > 0 })
+            {
+                iconslist[0].Icon = desktop.MainWindow.Icon;
+                TrayIcon.SetIcons(Application.Current, iconslist);
+            }
         }
     }
 

@@ -1,0 +1,392 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:v2rayN.Desktop.Controls">
+    <!--
+        Design language for the macOS main window: grouped-background content with white
+        cards, hairline separators, 13px body text and stroke icons, loosely following the
+        macOS System Settings look. Only MacMainWindow includes this file.
+    -->
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="MacContentBg" Color="#F5F5F7" />
+                    <SolidColorBrush x:Key="MacSidebarBg" Color="#E8E8EC" />
+                    <SolidColorBrush x:Key="MacCardBg" Color="#FFFFFF" />
+                    <SolidColorBrush x:Key="MacCardBorder" Color="#14000000" />
+                    <SolidColorBrush x:Key="MacHairline" Color="#12000000" />
+                    <SolidColorBrush x:Key="MacText0" Color="#1D1D1F" />
+                    <SolidColorBrush x:Key="MacText1" Color="#3A3A3C" />
+                    <SolidColorBrush x:Key="MacText2" Color="#86868B" />
+                    <SolidColorBrush x:Key="MacFillHover" Color="#0D000000" />
+                    <SolidColorBrush x:Key="MacFillPressed" Color="#17000000" />
+                    <SolidColorBrush x:Key="MacNavSelected" Color="#1A000000" />
+                    <SolidColorBrush x:Key="MacControlBg" Color="#0A000000" />
+                    <SolidColorBrush x:Key="MacAccent" Color="#007AFF" />
+                    <SolidColorBrush x:Key="MacAccentSoft" Color="#1F007AFF" />
+                    <SolidColorBrush x:Key="MacGreen" Color="#28A745" />
+                    <SolidColorBrush x:Key="MacGreenSoft" Color="#2434C759" />
+                    <SolidColorBrush x:Key="MacOrange" Color="#E67E00" />
+                    <SolidColorBrush x:Key="MacOrangeSoft" Color="#24FF9F0A" />
+                    <SolidColorBrush x:Key="MacRed" Color="#E5342A" />
+                    <SolidColorBrush x:Key="MacRedSoft" Color="#1FFF3B30" />
+                    <SolidColorBrush x:Key="MacGray" Color="#8E8E93" />
+                    <SolidColorBrush x:Key="MacGraySoft" Color="#1F8E8E93" />
+                    <SolidColorBrush x:Key="MacChartUp" Color="#AF52DE" />
+                    <SolidColorBrush x:Key="MacChartDown" Color="#007AFF" />
+                    <BoxShadows x:Key="MacCardShadow">0 1 2 0 #0A000000</BoxShadows>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="MacContentBg" Color="#1C1C1E" />
+                    <SolidColorBrush x:Key="MacSidebarBg" Color="#262628" />
+                    <SolidColorBrush x:Key="MacCardBg" Color="#2A2A2D" />
+                    <SolidColorBrush x:Key="MacCardBorder" Color="#1AFFFFFF" />
+                    <SolidColorBrush x:Key="MacHairline" Color="#14FFFFFF" />
+                    <SolidColorBrush x:Key="MacText0" Color="#F5F5F7" />
+                    <SolidColorBrush x:Key="MacText1" Color="#D1D1D6" />
+                    <SolidColorBrush x:Key="MacText2" Color="#98989D" />
+                    <SolidColorBrush x:Key="MacFillHover" Color="#0FFFFFFF" />
+                    <SolidColorBrush x:Key="MacFillPressed" Color="#1AFFFFFF" />
+                    <SolidColorBrush x:Key="MacNavSelected" Color="#1FFFFFFF" />
+                    <SolidColorBrush x:Key="MacControlBg" Color="#12FFFFFF" />
+                    <SolidColorBrush x:Key="MacAccent" Color="#0A84FF" />
+                    <SolidColorBrush x:Key="MacAccentSoft" Color="#330A84FF" />
+                    <SolidColorBrush x:Key="MacGreen" Color="#32D74B" />
+                    <SolidColorBrush x:Key="MacGreenSoft" Color="#2E32D74B" />
+                    <SolidColorBrush x:Key="MacOrange" Color="#FF9F0A" />
+                    <SolidColorBrush x:Key="MacOrangeSoft" Color="#2EFF9F0A" />
+                    <SolidColorBrush x:Key="MacRed" Color="#FF453A" />
+                    <SolidColorBrush x:Key="MacRedSoft" Color="#2EFF453A" />
+                    <SolidColorBrush x:Key="MacGray" Color="#8E8E93" />
+                    <SolidColorBrush x:Key="MacGraySoft" Color="#2E8E8E93" />
+                    <SolidColorBrush x:Key="MacChartUp" Color="#BF5AF2" />
+                    <SolidColorBrush x:Key="MacChartDown" Color="#0A84FF" />
+                    <BoxShadows x:Key="MacCardShadow">0 0 0 0 #00000000</BoxShadows>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <!--  Semi outlines the current cell; rows already show selection, so hide it.  -->
+            <SolidColorBrush x:Key="DataGridCellCurrentBorderBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+
+            <!--  Stroke icons on a 24x24 grid (Lucide, ISC license).  -->
+            <StreamGeometry x:Key="I.Gauge">M12 14l4-4 M3.34 19a10 10 0 1 1 17.32 0</StreamGeometry>
+            <StreamGeometry x:Key="I.Server">M4 2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z M4 14h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2z M6 6h.01 M6 18h.01</StreamGeometry>
+            <StreamGeometry x:Key="I.Globe">M2 12a10 10 0 1 0 20 0a10 10 0 1 0-20 0z M12 2a14.5 14.5 0 0 0 0 20a14.5 14.5 0 0 0 0-20 M2 12h20</StreamGeometry>
+            <StreamGeometry x:Key="I.Activity">M22 12h-4l-3 9L9 3l-3 9H2</StreamGeometry>
+            <StreamGeometry x:Key="I.Logs">M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z M14 2v4a2 2 0 0 0 2 2h4 M16 13H8 M16 17H8 M10 9H8</StreamGeometry>
+            <StreamGeometry x:Key="I.Refresh">M3 12a9 9 0 0 1 9-9a9.75 9.75 0 0 1 6.74 2.74L21 8 M21 3v5h-5 M21 12a9 9 0 0 1-9 9a9.75 9.75 0 0 1-6.74-2.74L3 16 M8 16H3v5</StreamGeometry>
+            <StreamGeometry x:Key="I.Route">M3 19a3 3 0 1 0 6 0a3 3 0 1 0-6 0z M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15 M15 5a3 3 0 1 0 6 0a3 3 0 1 0-6 0z</StreamGeometry>
+            <StreamGeometry x:Key="I.Sliders">M20 7h-9 M14 17H5 M14 17a3 3 0 1 0 6 0a3 3 0 1 0-6 0z M4 7a3 3 0 1 0 6 0a3 3 0 1 0-6 0z</StreamGeometry>
+            <StreamGeometry x:Key="I.Contrast">M2 12a10 10 0 1 0 20 0a10 10 0 1 0-20 0z M12 18a6 6 0 0 0 0-12v12z</StreamGeometry>
+            <StreamGeometry x:Key="I.More">M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0z M18 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0z M4 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0z</StreamGeometry>
+            <StreamGeometry x:Key="I.Plus">M5 12h14 M12 5v14</StreamGeometry>
+            <StreamGeometry x:Key="I.Zap">M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z</StreamGeometry>
+            <StreamGeometry x:Key="I.Power">M12 2v10 M18.4 6.6a9 9 0 1 1-12.77.04</StreamGeometry>
+            <StreamGeometry x:Key="I.ArrowUp">M5 12l7-7l7 7 M12 19V5</StreamGeometry>
+            <StreamGeometry x:Key="I.ArrowDown">M12 5v14 M19 12l-7 7l-7-7</StreamGeometry>
+            <StreamGeometry x:Key="I.Copy">M10 8h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2</StreamGeometry>
+            <StreamGeometry x:Key="I.ChevronDown">M6 9l6 6l6-6</StreamGeometry>
+            <StreamGeometry x:Key="I.Cpu">M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z M9 9h6v6H9z M9 1v3 M15 1v3 M9 20v3 M15 20v3 M20 9h3 M20 14h3 M1 9h3 M1 14h3</StreamGeometry>
+            <StreamGeometry x:Key="I.Shield">M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z</StreamGeometry>
+            <StreamGeometry x:Key="I.Plug">M12 22v-5 M9 8V2 M15 8V2 M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z</StreamGeometry>
+            <StreamGeometry x:Key="I.Monitor">M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z M8 21h8 M12 17v4</StreamGeometry>
+            <StreamGeometry x:Key="I.Clipboard">M9 2h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2</StreamGeometry>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <Style Selector="c|LineIcon">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!--  ===== Typography =====  -->
+    <Style Selector="TextBlock.pageTitle">
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.sectionTitle">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+    </Style>
+    <Style Selector="TextBlock.caption">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText2}" />
+    </Style>
+    <Style Selector="TextBlock.body">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+    </Style>
+
+    <!--  ===== Surfaces =====  -->
+    <Style Selector="Border.card">
+        <Setter Property="Background" Value="{DynamicResource MacCardBg}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MacCardBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="BoxShadow" Value="{DynamicResource MacCardShadow}" />
+    </Style>
+    <Style Selector="Border.hairline">
+        <Setter Property="Height" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource MacHairline}" />
+    </Style>
+    <Style Selector="Border.pill">
+        <Setter Property="CornerRadius" Value="999" />
+        <Setter Property="Padding" Value="8,2" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource MacGraySoft}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MacText1}" />
+    </Style>
+    <Style Selector="Border.pill > TextBlock">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Border.pill.good">
+        <Setter Property="Background" Value="{DynamicResource MacGreenSoft}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MacGreen}" />
+    </Style>
+    <Style Selector="Border.pill.warn">
+        <Setter Property="Background" Value="{DynamicResource MacOrangeSoft}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MacOrange}" />
+    </Style>
+    <Style Selector="Border.pill.bad">
+        <Setter Property="Background" Value="{DynamicResource MacRedSoft}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MacRed}" />
+    </Style>
+    <Style Selector="Border.pill.accent">
+        <Setter Property="Background" Value="{DynamicResource MacAccentSoft}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MacAccent}" />
+    </Style>
+
+    <!--  ===== Buttons =====  -->
+    <!--  Toolbar button: quiet, rounded, icon + label, like a macOS toolbar item.  -->
+    <Style Selector="Button.tool">
+        <Setter Property="Theme" Value="{DynamicResource BorderlessButton}" />
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="MinHeight" Value="28" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!--  Semi's borderless theme paints the inner presenter, so colors must target it.  -->
+    <Style Selector="Button.tool /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource MacControlBg}" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+    </Style>
+    <Style Selector="Button.tool:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource MacFillPressed}" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+    </Style>
+    <Style Selector="Button.tool:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource MacNavSelected}" />
+    </Style>
+    <Style Selector="Button.tool c|LineIcon">
+        <Setter Property="Foreground" Value="{DynamicResource MacText1}" />
+    </Style>
+    <Style Selector="Button.tool.primary /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource MacAccent}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="Button.tool.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SemiColorPrimaryPointerover}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="Button.tool.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SemiColorPrimaryActive}" />
+    </Style>
+    <Style Selector="Button.tool.primary c|LineIcon">
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="Button.link">
+        <Setter Property="Theme" Value="{DynamicResource BorderlessButton}" />
+        <Setter Property="Padding" Value="6,2" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource MacAccent}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button.link /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource MacAccent}" />
+    </Style>
+    <Style Selector="Button.link:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource MacAccentSoft}" />
+        <Setter Property="Foreground" Value="{DynamicResource MacAccent}" />
+    </Style>
+
+    <Style Selector="ScrollViewer">
+        <Setter Property="AllowAutoHide" Value="True" />
+    </Style>
+
+    <!--  ===== Grouped settings rows (System Settings style) =====  -->
+    <Style Selector="Grid.row">
+        <Setter Property="MinHeight" Value="44" />
+        <Setter Property="Margin" Value="14,0" />
+    </Style>
+    <Style Selector="Grid.row > TextBlock.rowLabel">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.rowIcon">
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Margin" Value="0,0,10,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.rowIcon > c|LineIcon">
+        <Setter Property="Width" Value="14" />
+        <Setter Property="Height" Value="14" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="StrokeThickness" Value="2.2" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <!--  ===== Segmented control =====  -->
+    <Style Selector="ListBox.segmented">
+        <Setter Property="Background" Value="{DynamicResource MacControlBg}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </Setter>
+    </Style>
+    <!--  The servers page group tabs reuse the segmented look.  -->
+    <Style Selector="ListBox#lstGroup">
+        <Setter Property="Background" Value="{DynamicResource MacControlBg}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="ListBox.segmented > ListBoxItem, ListBox#lstGroup > ListBoxItem">
+        <Setter Property="Padding" Value="12,4" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText1}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter
+                        HorizontalAlignment="Center"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        Foreground="{TemplateBinding Foreground}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="ListBox.segmented > ListBoxItem:pointerover, ListBox#lstGroup > ListBoxItem:pointerover">
+        <Setter Property="Background" Value="{DynamicResource MacFillHover}" />
+    </Style>
+    <Style Selector="ListBox.segmented > ListBoxItem:selected, ListBox#lstGroup > ListBoxItem:selected">
+        <Setter Property="Background" Value="{DynamicResource MacCardBg}" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <!--  ===== Hosted legacy views: servers table, clash views, logs =====  -->
+    <Style Selector="DataGrid">
+        <Setter Property="RowHeight" Value="34" />
+        <Setter Property="Background" Value="{DynamicResource MacCardBg}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MacCardBorder}" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource MacHairline}" />
+        <Setter Property="VerticalGridLinesBrush" Value="Transparent" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="DataGridColumnHeader">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText2}" />
+        <Setter Property="MinHeight" Value="32" />
+    </Style>
+    <Style Selector="DataGridCell">
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+    </Style>
+
+    <!--  Toolbars inside hosted views: lighter, smaller glyphs.  -->
+    <Style Selector="ContentControl.page Button.IconButton">
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="MinWidth" Value="30" />
+        <Setter Property="CornerRadius" Value="7" />
+    </Style>
+    <Style Selector="ContentControl.page Button.IconButton PathIcon">
+        <Setter Property="Width" Value="15" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText2}" />
+    </Style>
+    <Style Selector="ContentControl.page Button.IconButton:pointerover PathIcon">
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+    </Style>
+
+    <!--  Clash proxy groups / nodes: tiles instead of grey tags.  -->
+    <Style Selector="ListBox#lstProxyGroups, ListBox#lstProxyDetails">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="ListBox#lstProxyGroups">
+        <Setter Property="Margin" Value="0,0,10,0" />
+    </Style>
+    <Style Selector="ListBox#lstProxyGroups > ListBoxItem, ListBox#lstProxyDetails > ListBoxItem">
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Padding" Value="10,6" />
+        <Setter Property="Background" Value="{DynamicResource MacCardBg}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MacCardBorder}" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="ListBox#lstProxyGroups > ListBoxItem">
+        <Setter Property="Padding" Value="4,6" />
+    </Style>
+    <Style Selector="ListBox#lstProxyGroups > ListBoxItem:pointerover, ListBox#lstProxyDetails > ListBoxItem:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource MacText2}" />
+    </Style>
+    <Style Selector="ListBox#lstProxyGroups > ListBoxItem:selected, ListBox#lstProxyDetails > ListBoxItem:selected">
+        <Setter Property="Background" Value="{DynamicResource MacAccentSoft}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MacAccent}" />
+    </Style>
+    <Style Selector="ListBox#lstProxyGroups Label, ListBox#lstProxyDetails Label">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="CornerRadius" Value="7" />
+    </Style>
+</Styles>

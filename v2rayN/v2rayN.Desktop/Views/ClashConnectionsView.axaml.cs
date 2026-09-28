@@ -62,12 +62,24 @@ public partial class ClashConnectionsView : ReactiveUserControl<ClashConnections
 
     #region UI
 
+    private static readonly (string, int)[] _legacyColumnWidths =
+    [
+        ("Host", 300), ("Chain", 500), ("Network", 80), ("Type", 160), ("ProcessPath", 100), ("Elapsed", 100),
+    ];
+
     private void RestoreUI()
     {
         try
         {
             var lvColumnItem = _config.ClashUIItem?.ConnectionsColumnItem?.OrderBy(t => t.Index).ToList();
             if (lvColumnItem == null)
+            {
+                return;
+            }
+
+            // The old stock widths (1240px in total) pushed most columns off-screen; a layout the
+            // user never resized keeps the current XAML defaults instead.
+            if (lvColumnItem.Select(t => (t.Name, t.Width)).SequenceEqual(_legacyColumnWidths))
             {
                 return;
             }

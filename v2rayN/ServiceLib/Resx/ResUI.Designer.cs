@@ -5399,5 +5399,298 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("UpgradeAppNotExistTip", resourceCulture);
             }
         }
+
+        public static string MacTrayShowWindow {
+            get {
+                return ResourceManager.GetString("MacTrayShowWindow", resourceCulture);
+            }
+        }
+
+        public static string MacTraySystemProxy {
+            get {
+                return ResourceManager.GetString("MacTraySystemProxy", resourceCulture);
+            }
+        }
+
+        public static string MacTrayTunMode {
+            get {
+                return ResourceManager.GetString("MacTrayTunMode", resourceCulture);
+            }
+        }
+
+        public static string MacTrayOn {
+            get {
+                return ResourceManager.GetString("MacTrayOn", resourceCulture);
+            }
+        }
+
+        public static string MacTrayOff {
+            get {
+                return ResourceManager.GetString("MacTrayOff", resourceCulture);
+            }
+        }
+
+        public static string MacTrayServers {
+            get {
+                return ResourceManager.GetString("MacTrayServers", resourceCulture);
+            }
+        }
+
+        public static string MacTrayUpdateSubscription {
+            get {
+                return ResourceManager.GetString("MacTrayUpdateSubscription", resourceCulture);
+            }
+        }
+
+        public static string MacTrayExit {
+            get {
+                return ResourceManager.GetString("MacTrayExit", resourceCulture);
+            }
+        }
+
+        public static string MacNavDashboard {
+            get {
+                return ResourceManager.GetString("MacNavDashboard", resourceCulture);
+            }
+        }
+
+        public static string MacNavSubscription {
+            get {
+                return ResourceManager.GetString("MacNavSubscription", resourceCulture);
+            }
+        }
+
+        public static string MacNavRouting {
+            get {
+                return ResourceManager.GetString("MacNavRouting", resourceCulture);
+            }
+        }
+
+        public static string MacNavLogs {
+            get {
+                return ResourceManager.GetString("MacNavLogs", resourceCulture);
+            }
+        }
+
+        public static string MacNavMore {
+            get {
+                return ResourceManager.GetString("MacNavMore", resourceCulture);
+            }
+        }
+
+        public static string MacDashPowerOn {
+            get {
+                return ResourceManager.GetString("MacDashPowerOn", resourceCulture);
+            }
+        }
+
+        public static string MacDashPowerOff {
+            get {
+                return ResourceManager.GetString("MacDashPowerOff", resourceCulture);
+            }
+        }
+
+        public static string MacDashPowerHintOn {
+            get {
+                return ResourceManager.GetString("MacDashPowerHintOn", resourceCulture);
+            }
+        }
+
+        public static string MacDashPowerHintOff {
+            get {
+                return ResourceManager.GetString("MacDashPowerHintOff", resourceCulture);
+            }
+        }
+
+        public static string MacDashNoServer {
+            get {
+                return ResourceManager.GetString("MacDashNoServer", resourceCulture);
+            }
+        }
+
+        public static string MacDashLatency {
+            get {
+                return ResourceManager.GetString("MacDashLatency", resourceCulture);
+            }
+        }
+
+        public static string MacDashTestLatency {
+            get {
+                return ResourceManager.GetString("MacDashTestLatency", resourceCulture);
+            }
+        }
+
+        public static string MacDashUp {
+            get {
+                return ResourceManager.GetString("MacDashUp", resourceCulture);
+            }
+        }
+
+        public static string MacDashDown {
+            get {
+                return ResourceManager.GetString("MacDashDown", resourceCulture);
+            }
+        }
+
+        public static string MacDashCore {
+            get {
+                return ResourceManager.GetString("MacDashCore", resourceCulture);
+            }
+        }
+
+        public static string MacDashCoreRunning {
+            get {
+                return ResourceManager.GetString("MacDashCoreRunning", resourceCulture);
+            }
+        }
+
+        public static string MacDashCoreStopped {
+            get {
+                return ResourceManager.GetString("MacDashCoreStopped", resourceCulture);
+            }
+        }
+
+        public static string MacDashReload {
+            get {
+                return ResourceManager.GetString("MacDashReload", resourceCulture);
+            }
+        }
+        public static string MacNavServers {
+            get {
+                return ResourceManager.GetString("MacNavServers", resourceCulture);
+            }
+        }
+
+        public static string MacNavProxies {
+            get {
+                return ResourceManager.GetString("MacNavProxies", resourceCulture);
+            }
+        }
+
+        public static string MacNavConnections {
+            get {
+                return ResourceManager.GetString("MacNavConnections", resourceCulture);
+            }
+        }
+
+        public static string MacNavSectionSettings {
+            get {
+                return ResourceManager.GetString("MacNavSectionSettings", resourceCulture);
+            }
+        }
+
+        public static string MacNavPreferences {
+            get {
+                return ResourceManager.GetString("MacNavPreferences", resourceCulture);
+            }
+        }
+
+        public static string MacNavAppearance {
+            get {
+                return ResourceManager.GetString("MacNavAppearance", resourceCulture);
+            }
+        }
+
+        public static string MacAddServer {
+            get {
+                return ResourceManager.GetString("MacAddServer", resourceCulture);
+            }
+        }
+
+        public static string MacDashSystemProxy {
+            get {
+                return ResourceManager.GetString("MacDashSystemProxy", resourceCulture);
+            }
+        }
+
+        public static string MacDashRouting {
+            get {
+                return ResourceManager.GetString("MacDashRouting", resourceCulture);
+            }
+        }
+
+        public static string MacDashTraffic {
+            get {
+                return ResourceManager.GetString("MacDashTraffic", resourceCulture);
+            }
+        }
+
+        public static string MacDashSpeedOff {
+            get {
+                return ResourceManager.GetString("MacDashSpeedOff", resourceCulture);
+            }
+        }
+
+        public static string MacDashSpeedEnable {
+            get {
+                return ResourceManager.GetString("MacDashSpeedEnable", resourceCulture);
+            }
+        }
+
+        public static string MacDashCopyProxyCmd {
+            get {
+                return ResourceManager.GetString("MacDashCopyProxyCmd", resourceCulture);
+            }
+        }
+
+        public static string MacDashListening {
+            get {
+                return ResourceManager.GetString("MacDashListening", resourceCulture);
+            }
+        }
+
+        public static string MacProxyOff {
+            get {
+                return ResourceManager.GetString("MacProxyOff", resourceCulture);
+            }
+        }
+
+        public static string MacProxyOn {
+            get {
+                return ResourceManager.GetString("MacProxyOn", resourceCulture);
+            }
+        }
+
+        public static string MacProxyKeep {
+            get {
+                return ResourceManager.GetString("MacProxyKeep", resourceCulture);
+            }
+        }
+
+        public static string MacProxyPac {
+            get {
+                return ResourceManager.GetString("MacProxyPac", resourceCulture);
+            }
+        }
+
+        public static string MacDashTesting {
+            get {
+                return ResourceManager.GetString("MacDashTesting", resourceCulture);
+            }
+        }
+
+        public static string MacDashNotTested {
+            get {
+                return ResourceManager.GetString("MacDashNotTested", resourceCulture);
+            }
+        }
+
+        public static string MacDashTimeout {
+            get {
+                return ResourceManager.GetString("MacDashTimeout", resourceCulture);
+            }
+        }
+
+        public static string MacDashLatencyHint {
+            get {
+                return ResourceManager.GetString("MacDashLatencyHint", resourceCulture);
+            }
+        }
+
+        public static string MacSidebarIdle {
+            get {
+                return ResourceManager.GetString("MacSidebarIdle", resourceCulture);
+            }
+        }
     }
 }

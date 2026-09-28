@@ -16,6 +16,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <conv:DelayColorConverter x:Key="DelayColorConverter" />
+        <conv:DelayTextConverter x:Key="DelayTextConverter" />
     </UserControl.Resources>
     <Grid>
         <DockPanel>
@@ -106,8 +107,8 @@
                 CanUserReorderColumns="True"
                 CanUserResizeColumns="True"
                 Classes.InsetContent="True"
-                GridLinesVisibility="All"
-                HeadersVisibility="All"
+                GridLinesVisibility="Horizontal"
+                HeadersVisibility="Column"
                 IsReadOnly="True"
                 ItemsSource="{Binding ProfileItems}">
                 <DataGrid.KeyBindings>
@@ -208,7 +209,7 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
-                        Width="80"
+                        Width="96"
                         Binding="{Binding ConfigType}"
                         Header="{x:Static resx:ResUI.LvServiceType}"
                         Tag="ConfigType" />
@@ -222,7 +223,7 @@
                                 <StackPanel Margin="{StaticResource MarginLr8}" Orientation="Horizontal">
                                     <Label
                                         Margin="{StaticResource MarginLr4}"
-                                        Classes="Solid Red"
+                                        Classes="Green"
                                         Content="{x:Static resx:ResUI.TipActiveServer}"
                                         IsVisible="{Binding IsActive}"
                                         Theme="{DynamicResource TagLabel}" />
@@ -234,6 +235,27 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn SortMemberPath="Delay" Tag="DelayVal">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Text="{x:Static resx:ResUI.LvTestDelay}" />
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="{StaticResource MarginLr8}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Foreground="{Binding Delay, Converter={StaticResource DelayColorConverter}}"
+                                    Text="{Binding Path=DelayVal, Mode=OneWay, Converter={StaticResource DelayTextConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn
+                        Width="100"
+                        Binding="{Binding SpeedVal}"
+                        Header="{x:Static resx:ResUI.LvTestSpeed}"
+                        Tag="SpeedVal" />
 
                     <DataGridTextColumn
                         Width="120"
@@ -260,26 +282,6 @@
                         Binding="{Binding SubRemarks}"
                         Header="{x:Static resx:ResUI.LvSubscription}"
                         Tag="SubRemarks" />
-                    <DataGridTemplateColumn SortMemberPath="Delay" Tag="DelayVal">
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock Text="{x:Static resx:ResUI.LvTestDelay}" />
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                    Margin="{StaticResource MarginLr8}"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Foreground="{Binding Delay, Converter={StaticResource DelayColorConverter}}"
-                                    Text="{Binding Path=DelayVal, Mode=OneWay}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn
-                        Width="100"
-                        Binding="{Binding SpeedVal}"
-                        Header="{x:Static resx:ResUI.LvTestSpeed}"
-                        Tag="SpeedVal" />
 
                     <DataGridTemplateColumn SortMemberPath="IpInfo" Tag="IpInfo">
                         <DataGridTemplateColumn.Header>

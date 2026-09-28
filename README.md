@@ -1,4 +1,20 @@
-# v2rayN
+# v2rayN · macOS UI fork
+
+> **这是 [2dust/v2rayN](https://github.com/2dust/v2rayN) 的非官方 fork**，在官方版本基础上重做了 macOS 主窗口。其它平台的界面基本不变。官方版本请前往上游仓库。
+>
+> - **新的 Mac 主窗口**：侧边栏导航；仪表盘提供连接开关、延迟、实时流量曲线、系统代理模式、路由规则和 TUN 开关；菜单栏图标由原生代码实现；支持浅色和深色模式
+> - **服务器页**：补回了"添加服务器"和"更新订阅"入口；延迟列移到名称旁，失败时显示"超时"；表格样式更简洁
+> - **更快的切换**：启动核心后不再固定等待 1 秒，而是探测本地端口，就绪后立即继续（已向上游提交 PR）
+>
+> 从源码构建（Apple Silicon）：`./build-macos.sh arm64`，产物在 `dist/v2rayN-Package-macos-arm64/v2rayN.app`。
+>
+> 预发布版只做了 ad-hoc 签名，首次打开前需要执行：`xattr -cr /Applications/v2rayN.app`
+>
+> *An unofficial fork of 2dust/v2rayN with a redesigned macOS main window. Licensed under GPL-3.0 like upstream.*
+
+---
+
+## Upstream README
 
 ### A GUI client for Windows, Linux and macOS. Support [Xray](https://github.com/XTLS/Xray-core) and [sing-box](https://github.com/SagerNet/sing-box) and [others](https://github.com/2dust/v2rayN/wiki/List-of-supported-cores)
 

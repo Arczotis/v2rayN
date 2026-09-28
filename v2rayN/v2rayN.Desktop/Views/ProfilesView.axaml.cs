@@ -364,11 +364,20 @@ public partial class ProfilesView : ReactiveUserControl<ProfilesViewModel>
 
     #region UI
 
+    private static readonly string[] _legacyColumnOrder =
+    [
+        "ConfigType", "Remarks", "Address", "Port", "Network", "StreamSecurity", "SubRemarks",
+        "DelayVal", "SpeedVal", "IpInfo", "TodayUp", "TodayDown", "TotalUp", "TotalDown",
+    ];
+
     private void RestoreUI()
     {
         try
         {
             var lvColumnItem = _config.UiItem.MainColumnItem.OrderBy(t => t.Index).ToList();
+            // A layout still in the old stock order was never rearranged by the user, so let the
+            // current XAML order (latency next to the name) win instead of replaying the old one.
+            var keepXamlOrder = lvColumnItem.Select(t => t.Name).SequenceEqual(_legacyColumnOrder);
             var displayIndex = 0;
             foreach (var item in lvColumnItem)
             {
@@ -386,8 +395,12 @@ public partial class ProfilesView : ReactiveUserControl<ProfilesViewModel>
                         }
                         else
                         {
-                            item2.Width = new DataGridLength(item.Width, DataGridLengthUnitType.Pixel);
-                            item2.DisplayIndex = displayIndex++;
+                            var width = keepXamlOrder && item.Name == "ConfigType" ? Math.Max(item.Width, 96) : item.Width;
+                            item2.Width = new DataGridLength(width, DataGridLengthUnitType.Pixel);
+                            if (!keepXamlOrder)
+                            {
+                                item2.DisplayIndex = displayIndex++;
+                            }
                         }
                         if (item.Name.StartsWith("to", StringComparison.CurrentCultureIgnoreCase))
                         {

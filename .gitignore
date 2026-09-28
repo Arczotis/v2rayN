@@ -402,3 +402,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# macOS
+.DS_Store
+
+# Local macOS build output (build-macos.sh)
+/dist/

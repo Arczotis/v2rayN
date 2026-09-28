@@ -1,3 +1,4 @@
+using v2rayN.Desktop.Base;
 using v2rayN.Desktop.Common;
 using v2rayN.Desktop.Views;
 
@@ -8,6 +9,16 @@ public partial class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+
+        // MacStatusBar owns the menu-bar item natively. The XAML TrayIcon starts hidden
+        // because its .ico cannot be decoded on macOS and would leave a blank status item.
+        if (!OperatingSystem.IsMacOS())
+        {
+            foreach (var icon in TrayIcon.GetIcons(this) ?? [])
+            {
+                icon.IsVisible = true;
+            }
+        }
 
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
@@ -27,12 +38,24 @@ public partial class App : Application
             }
 
             var mainWindowViewModel = new MainWindowViewModel();
-            var mainWindow = (MainWindow)viewLocator.Build(mainWindowViewModel);
-            mainWindow.ViewModel = mainWindowViewModel;
+            var mainWindowView = viewLocator.Build(mainWindowViewModel);
+            var mainWindow = (Window)mainWindowView;
+            if (mainWindowView is WindowBase<MainWindowViewModel> windowBase)
+            {
+                windowBase.ViewModel = mainWindowViewModel;
+            }
+
             desktop.MainWindow = mainWindow;
 
             if (OperatingSystem.IsMacOS())
             {
+                // Avalonia's TrayIcon cannot report left/right clicks on macOS and always
+                // swallows every click into its NSMenu, so the menu-bar item is owned natively.
+                if (!Design.IsDesignMode)
+                {
+                    MacStatusBar.Start();
+                }
+
                 Current?.TryGetFeature<IActivatableLifetime>()?.Activated += OnMacOSActivated;
             }
         }
@@ -49,7 +72,8 @@ public partial class App : Application
             return;
         }
 
-        if ((ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow is not MainWindow mainWindow)
+        if ((ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow is not Window mainWindow
+            || mainWindow is not IMainWindowView mainView)
         {
             return;
         }
@@ -60,52 +84,12 @@ public partial class App : Application
         {
             if (isMiniaturized)
             {
-                RestoreMacOSAccessoryPolicyAfterMiniaturize(mainWindow);
-                mainWindow.ShowHideWindow(true);
+                mainView.ShowHideWindow(true);
                 return;
             }
 
-            if (!AppManager.Instance.Config.UiItem.MacOSShowInDock)
-            {
-                MacAppUtils.SetActivationPolicyAccessory();
-            }
-
-            mainWindow.ShowHideWindow(true);
+            mainView.ShowHideWindow(true);
         });
-    }
-
-    private static void RestoreMacOSAccessoryPolicyAfterMiniaturize(MainWindow mainWindow)
-    {
-        if (AppManager.Instance.Config.UiItem.MacOSShowInDock)
-        {
-            return;
-        }
-
-        mainWindow
-            .GetObservable(Window.WindowStateProperty)
-            .Skip(1)
-            .Where(state => state != WindowState.Minimized)
-            .Take(1)
-            .ObserveOn(RxSchedulers.MainThreadScheduler)
-            .Subscribe(_ => QueueMacOSAccessoryPolicyRestore(mainWindow));
-    }
-
-    private static void QueueMacOSAccessoryPolicyRestore(MainWindow mainWindow)
-    {
-        // AppKit may keep isMiniaturized set until the Dock restore animation finishes.
-        DispatcherTimer.RunOnce(() => RestoreMacOSAccessoryPolicy(mainWindow), TimeSpan.FromMilliseconds(300));
-    }
-
-    private static void RestoreMacOSAccessoryPolicy(MainWindow mainWindow)
-    {
-        if (AppManager.Instance.Config.UiItem.MacOSShowInDock || MacAppUtils.IsWindowMiniaturized(mainWindow))
-        {
-            return;
-        }
-
-        MacAppUtils.SetActivationPolicyAccessory();
-        mainWindow.Activate();
-        mainWindow.Focus();
     }
 
     #endregion MacOS Activation

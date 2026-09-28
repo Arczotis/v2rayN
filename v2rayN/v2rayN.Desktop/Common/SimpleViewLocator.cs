@@ -24,7 +24,7 @@ public class SimpleViewLocator : IDataTemplate
         RegisterViewFactory<DNSSettingViewModel, DNSSettingWindow>();
         RegisterViewFactory<FullConfigTemplateViewModel, FullConfigTemplateWindow>();
         RegisterViewFactory<GlobalHotkeySettingViewModel, GlobalHotkeySettingWindow>();
-        RegisterViewFactory<MainWindowViewModel, MainWindow>();
+        _locator.Add(typeof(MainWindowViewModel), () => OperatingSystem.IsMacOS() ? new MacMainWindow() : new MainWindow());
         RegisterViewFactory<MsgViewModel, MsgView>();
         RegisterViewFactory<OptionSettingViewModel, OptionSettingWindow>();
         RegisterViewFactory<ProfilesSelectViewModel, ProfilesSelectWindow>();

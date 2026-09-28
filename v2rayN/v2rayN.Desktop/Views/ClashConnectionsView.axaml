@@ -74,32 +74,33 @@
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    Width="300"
+                    Width="*"
+                    MinWidth="180"
                     Binding="{Binding Host}"
                     Header="{x:Static resx:ResUI.TbSortingHost}"
                     Tag="Host" />
                 <DataGridTextColumn
-                    Width="500"
+                    Width="200"
                     Binding="{Binding Chain}"
                     Header="{x:Static resx:ResUI.TbSortingChain}"
                     Tag="Chain" />
                 <DataGridTextColumn
-                    Width="80"
+                    Width="70"
                     Binding="{Binding Network}"
                     Header="{x:Static resx:ResUI.TbSortingNetwork}"
                     Tag="Network" />
                 <DataGridTextColumn
-                    Width="160"
+                    Width="100"
                     Binding="{Binding Type}"
                     Header="{x:Static resx:ResUI.TbSortingType}"
                     Tag="Type" />
                 <DataGridTextColumn
-                    Width="100"
+                    Width="110"
                     Binding="{Binding ProcessPath}"
                     Header="{x:Static resx:ResUI.TbSortingProcess}"
                     Tag="ProcessPath" />
                 <DataGridTextColumn
-                    Width="100"
+                    Width="80"
                     Binding="{Binding Elapsed}"
                     Header="{x:Static resx:ResUI.TbSortingTime}"
                     Tag="Elapsed" />

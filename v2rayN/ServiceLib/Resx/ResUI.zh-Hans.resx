@@ -1891,4 +1891,151 @@
   <data name="TbSortingProcess" xml:space="preserve">
     <value>进程</value>
   </data>
+  <data name="MacTrayShowWindow" xml:space="preserve">
+    <value>显示主窗口</value>
+  </data>
+  <data name="MacTraySystemProxy" xml:space="preserve">
+    <value>系统代理</value>
+  </data>
+  <data name="MacTrayTunMode" xml:space="preserve">
+    <value>TUN 模式</value>
+  </data>
+  <data name="MacTrayOn" xml:space="preserve">
+    <value>开</value>
+  </data>
+  <data name="MacTrayOff" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="MacTrayServers" xml:space="preserve">
+    <value>服务器</value>
+  </data>
+  <data name="MacTrayUpdateSubscription" xml:space="preserve">
+    <value>更新订阅</value>
+  </data>
+  <data name="MacTrayExit" xml:space="preserve">
+    <value>退出 v2rayN</value>
+  </data>
+  <data name="MacNavDashboard" xml:space="preserve">
+    <value>仪表盘</value>
+  </data>
+  <data name="MacNavSubscription" xml:space="preserve">
+    <value>订阅</value>
+  </data>
+  <data name="MacNavRouting" xml:space="preserve">
+    <value>路由</value>
+  </data>
+  <data name="MacNavLogs" xml:space="preserve">
+    <value>日志</value>
+  </data>
+  <data name="MacNavMore" xml:space="preserve">
+    <value>更多</value>
+  </data>
+  <data name="MacDashPowerOn" xml:space="preserve">
+    <value>已连接</value>
+  </data>
+  <data name="MacDashPowerOff" xml:space="preserve">
+    <value>未连接</value>
+  </data>
+  <data name="MacDashPowerHintOn" xml:space="preserve">
+    <value>系统代理已开启，点击关闭</value>
+  </data>
+  <data name="MacDashPowerHintOff" xml:space="preserve">
+    <value>系统代理已关闭，点击开启</value>
+  </data>
+  <data name="MacDashNoServer" xml:space="preserve">
+    <value>未配置服务器</value>
+  </data>
+  <data name="MacDashLatency" xml:space="preserve">
+    <value>延迟</value>
+  </data>
+  <data name="MacDashTestLatency" xml:space="preserve">
+    <value>测速</value>
+  </data>
+  <data name="MacDashUp" xml:space="preserve">
+    <value>上传</value>
+  </data>
+  <data name="MacDashDown" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="MacDashCore" xml:space="preserve">
+    <value>核心</value>
+  </data>
+  <data name="MacDashCoreRunning" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="MacDashCoreStopped" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="MacDashReload" xml:space="preserve">
+    <value>重载核心</value>
+  </data>
+  <data name="MacNavServers" xml:space="preserve">
+    <value>服务器</value>
+  </data>
+  <data name="MacNavProxies" xml:space="preserve">
+    <value>代理组</value>
+  </data>
+  <data name="MacNavConnections" xml:space="preserve">
+    <value>连接</value>
+  </data>
+  <data name="MacNavSectionSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="MacNavPreferences" xml:space="preserve">
+    <value>偏好设置</value>
+  </data>
+  <data name="MacNavAppearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="MacAddServer" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="MacDashSystemProxy" xml:space="preserve">
+    <value>系统代理</value>
+  </data>
+  <data name="MacDashRouting" xml:space="preserve">
+    <value>路由规则</value>
+  </data>
+  <data name="MacDashTraffic" xml:space="preserve">
+    <value>流量</value>
+  </data>
+  <data name="MacDashSpeedOff" xml:space="preserve">
+    <value>实时速率未开启</value>
+  </data>
+  <data name="MacDashSpeedEnable" xml:space="preserve">
+    <value>开启</value>
+  </data>
+  <data name="MacDashCopyProxyCmd" xml:space="preserve">
+    <value>复制终端代理命令</value>
+  </data>
+  <data name="MacDashListening" xml:space="preserve">
+    <value>本地监听</value>
+  </data>
+  <data name="MacProxyOff" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="MacProxyOn" xml:space="preserve">
+    <value>开启</value>
+  </data>
+  <data name="MacProxyKeep" xml:space="preserve">
+    <value>不改变</value>
+  </data>
+  <data name="MacProxyPac" xml:space="preserve">
+    <value>PAC</value>
+  </data>
+  <data name="MacDashTesting" xml:space="preserve">
+    <value>测试中…</value>
+  </data>
+  <data name="MacDashNotTested" xml:space="preserve">
+    <value>未测试</value>
+  </data>
+  <data name="MacDashTimeout" xml:space="preserve">
+    <value>超时</value>
+  </data>
+  <data name="MacDashLatencyHint" xml:space="preserve">
+    <value>经代理实测</value>
+  </data>
+  <data name="MacSidebarIdle" xml:space="preserve">
+    <value>代理未开启</value>
+  </data>
 </root>

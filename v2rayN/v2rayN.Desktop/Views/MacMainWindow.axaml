@@ -1,0 +1,391 @@
+<Window
+    x:Class="v2rayN.Desktop.Views.MacMainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:v2rayN.Desktop.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resx="clr-namespace:ServiceLib.Resx;assembly=ServiceLib"
+    xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
+    Title="v2rayN"
+    Width="1040"
+    Height="700"
+    MinWidth="880"
+    MinHeight="560"
+    x:DataType="vms:MainWindowViewModel"
+    Background="{DynamicResource MacContentBg}"
+    ExtendClientAreaToDecorationsHint="True"
+    ShowInTaskbar="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Styles>
+        <StyleInclude Source="/Assets/MacStyles.axaml" />
+
+        <!--  Sidebar navigation: Finder-like 30px rows, tinted icon on the selected row.  -->
+        <Style Selector="ListBox.sideNav">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        </Style>
+        <Style Selector="ListBox.sideNav > ListBoxItem, Button.sideBtn">
+            <Setter Property="Padding" Value="10,0" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="0,1" />
+            <Setter Property="CornerRadius" Value="7" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="ListBox.sideNav > ListBoxItem">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <ContentPresenter
+                            x:Name="PART_ContentPresenter"
+                            VerticalAlignment="Center"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="ListBox.sideNav > ListBoxItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource MacFillHover}" />
+        </Style>
+        <Style Selector="ListBox.sideNav > ListBoxItem:selected">
+            <Setter Property="Background" Value="{DynamicResource MacNavSelected}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="ListBox.sideNav > ListBoxItem c|LineIcon">
+            <Setter Property="Foreground" Value="{DynamicResource MacAccent}" />
+        </Style>
+        <Style Selector="Button.sideBtn">
+            <Setter Property="Theme" Value="{DynamicResource BorderlessButton}" />
+        </Style>
+        <Style Selector="Button.sideBtn c|LineIcon">
+            <Setter Property="Foreground" Value="{DynamicResource MacText2}" />
+        </Style>
+        <Style Selector="Button.sideBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource MacFillHover}" />
+            <Setter Property="Foreground" Value="{DynamicResource MacText0}" />
+        </Style>
+        <Style Selector="Button.sideBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource MacFillPressed}" />
+        </Style>
+        <Style Selector="TextBlock.sideHeader">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource MacText2}" />
+            <Setter Property="Margin" Value="10,14,0,4" />
+        </Style>
+
+        <Style Selector="Ellipse#dotStatus">
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Height" Value="8" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Fill" Value="{DynamicResource MacGray}" />
+        </Style>
+        <Style Selector="Ellipse#dotStatus.on">
+            <Setter Property="Fill" Value="{DynamicResource MacGreen}" />
+        </Style>
+
+    </Window.Styles>
+
+    <dialogHost:DialogHost CloseOnClickAway="True" DisableOpeningAnimation="True">
+        <Grid ColumnDefinitions="216,*">
+            <!--  ===== Sidebar =====  -->
+            <Border
+                Background="{DynamicResource MacSidebarBg}"
+                BorderBrush="{DynamicResource MacHairline}"
+                BorderThickness="0,0,1,0">
+                <DockPanel Margin="10,0">
+                    <!--  Traffic-light zone + brand  -->
+                    <StackPanel
+                        Margin="8,46,8,10"
+                        DockPanel.Dock="Top"
+                        Orientation="Horizontal"
+                        Spacing="10">
+                        <Image
+                            Width="26"
+                            Height="26"
+                            Source="/v2rayN.png" />
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource MacText0}"
+                            Text="v2rayN" />
+                    </StackPanel>
+
+                    <!--  Connection summary; click jumps to the dashboard.  -->
+                    <Button
+                        x:Name="btnStatus"
+                        Margin="0,8,0,12"
+                        Padding="0"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch"
+                        Background="Transparent"
+                        DockPanel.Dock="Bottom"
+                        Theme="{DynamicResource BorderlessButton}">
+                        <Border Padding="12,10" Classes="card">
+                            <StackPanel Spacing="4">
+                                <StackPanel Orientation="Horizontal" Spacing="7">
+                                    <Ellipse x:Name="dotStatus" />
+                                    <TextBlock
+                                        x:Name="txtStatus"
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource MacText0}" />
+                                </StackPanel>
+                                <TextBlock
+                                    x:Name="txtStatusServer"
+                                    FontSize="11"
+                                    Foreground="{DynamicResource MacText2}"
+                                    TextTrimming="CharacterEllipsis" />
+                                <StackPanel
+                                    x:Name="spStatusSpeed"
+                                    Orientation="Horizontal"
+                                    Spacing="10">
+                                    <StackPanel Orientation="Horizontal" Spacing="3">
+                                        <c:LineIcon
+                                            Width="10"
+                                            Height="10"
+                                            Data="{DynamicResource I.ArrowUp}"
+                                            Foreground="{DynamicResource MacChartUp}"
+                                            StrokeThickness="2.6" />
+                                        <TextBlock
+                                            x:Name="txtStatusUp"
+                                            FontFeatures="+tnum"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource MacText1}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Spacing="3">
+                                        <c:LineIcon
+                                            Width="10"
+                                            Height="10"
+                                            Data="{DynamicResource I.ArrowDown}"
+                                            Foreground="{DynamicResource MacChartDown}"
+                                            StrokeThickness="2.6" />
+                                        <TextBlock
+                                            x:Name="txtStatusDown"
+                                            FontFeatures="+tnum"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource MacText1}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <ListBox
+                                x:Name="navList"
+                                Classes="sideNav"
+                                SelectedIndex="0">
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <c:LineIcon Data="{DynamicResource I.Gauge}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavDashboard}" />
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <c:LineIcon Data="{DynamicResource I.Server}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavServers}" />
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem x:Name="navProxies" IsVisible="False">
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <c:LineIcon Data="{DynamicResource I.Globe}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavProxies}" />
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem x:Name="navConnections" IsVisible="False">
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <c:LineIcon Data="{DynamicResource I.Activity}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavConnections}" />
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <c:LineIcon Data="{DynamicResource I.Logs}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavLogs}" />
+                                    </StackPanel>
+                                </ListBoxItem>
+                            </ListBox>
+
+                            <TextBlock Classes="sideHeader" Text="{x:Static resx:ResUI.MacNavSectionSettings}" />
+                            <Button x:Name="btnSubscription" Classes="sideBtn">
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <c:LineIcon Data="{DynamicResource I.Refresh}" />
+                                    <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavSubscription}" />
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="btnRouting" Classes="sideBtn">
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <c:LineIcon Data="{DynamicResource I.Route}" />
+                                    <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavRouting}" />
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="btnSettings" Classes="sideBtn">
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <c:LineIcon Data="{DynamicResource I.Sliders}" />
+                                    <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavPreferences}" />
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="btnTheme" Classes="sideBtn">
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <c:LineIcon Data="{DynamicResource I.Contrast}" />
+                                    <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavAppearance}" />
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="btnMore" Classes="sideBtn">
+                                <Button.Flyout>
+                                    <MenuFlyout Placement="RightEdgeAlignedTop">
+                                        <MenuItem Command="{Binding DNSSettingCmd}" Header="{x:Static resx:ResUI.menuDNSSetting}" />
+                                        <MenuItem Command="{Binding FullConfigTemplateCmd}" Header="{x:Static resx:ResUI.menuFullConfigTemplate}" />
+                                        <Separator />
+                                        <MenuItem Header="{x:Static resx:ResUI.menuRegionalPresets}">
+                                            <MenuItem Command="{Binding RegionalPresetDefaultCmd}" Header="{x:Static resx:ResUI.menuRegionalPresetsDefault}" />
+                                            <MenuItem Command="{Binding RegionalPresetRussiaCmd}" Header="{x:Static resx:ResUI.menuRegionalPresetsRussia}" />
+                                            <MenuItem Command="{Binding RegionalPresetIranCmd}" Header="{x:Static resx:ResUI.menuRegionalPresetsIran}" />
+                                        </MenuItem>
+                                        <MenuItem Command="{Binding ClearServerStatisticsCmd}" Header="{x:Static resx:ResUI.menuClearServerStatistics}" />
+                                        <Separator />
+                                        <MenuItem x:Name="menuBackupAndRestore" Header="{x:Static resx:ResUI.menuBackupAndRestore}" />
+                                        <MenuItem Command="{Binding OpenTheFileLocationCmd}" Header="{x:Static resx:ResUI.menuOpenTheFileLocation}" />
+                                        <Separator />
+                                        <MenuItem x:Name="menuCheckUpdate" Header="{x:Static resx:ResUI.menuCheckUpdate}" />
+                                        <MenuItem x:Name="menuAbout" IsEnabled="False" />
+                                        <Separator />
+                                        <MenuItem x:Name="menuClose" Header="{x:Static resx:ResUI.menuExit}" />
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <c:LineIcon Data="{DynamicResource I.More}" />
+                                    <TextBlock VerticalAlignment="Center" Text="{x:Static resx:ResUI.MacNavMore}" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <!--  ===== Content =====  -->
+            <DockPanel Grid.Column="1">
+                <Grid
+                    Height="56"
+                    Margin="28,30,28,8"
+                    ColumnDefinitions="*,Auto"
+                    DockPanel.Dock="Top">
+                    <TextBlock x:Name="txtPageTitle" Classes="pageTitle" />
+
+                    <!--  Servers page actions (the old menu bar had these; the Mac window had lost them).  -->
+                    <StackPanel
+                        x:Name="spServerActions"
+                        Grid.Column="1"
+                        IsVisible="False"
+                        Orientation="Horizontal"
+                        Spacing="8">
+                        <Button Classes="tool">
+                            <Button.Flyout>
+                                <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                    <MenuItem Command="{Binding SubUpdateCmd}" Header="{x:Static resx:ResUI.menuSubUpdate}" />
+                                    <MenuItem Command="{Binding SubUpdateViaProxyCmd}" Header="{x:Static resx:ResUI.menuSubUpdateViaProxy}" />
+                                    <Separator />
+                                    <MenuItem Command="{Binding SubGroupUpdateCmd}" Header="{x:Static resx:ResUI.menuSubGroupUpdate}" />
+                                    <MenuItem Command="{Binding SubGroupUpdateViaProxyCmd}" Header="{x:Static resx:ResUI.menuSubGroupUpdateViaProxy}" />
+                                    <Separator />
+                                    <MenuItem Command="{Binding SubSettingCmd}" Header="{x:Static resx:ResUI.menuSubSetting}" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <c:LineIcon
+                                    Width="14"
+                                    Height="14"
+                                    Data="{DynamicResource I.Refresh}" />
+                                <TextBlock Text="{x:Static resx:ResUI.MacTrayUpdateSubscription}" />
+                                <c:LineIcon
+                                    Width="12"
+                                    Height="12"
+                                    Data="{DynamicResource I.ChevronDown}" />
+                            </StackPanel>
+                        </Button>
+                        <Button Classes="tool primary">
+                            <Button.Flyout>
+                                <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                    <MenuItem Command="{Binding AddServerViaClipboardCmd}" Header="{x:Static resx:ResUI.menuAddServerViaClipboard}" />
+                                    <MenuItem Command="{Binding AddServerViaScanCmd}" Header="{x:Static resx:ResUI.menuAddServerViaScan}" />
+                                    <MenuItem Command="{Binding AddServerViaImageCmd}" Header="{x:Static resx:ResUI.menuAddServerViaImage}" />
+                                    <Separator />
+                                    <MenuItem Command="{Binding AddVlessServerCmd}" Header="{x:Static resx:ResUI.menuAddVlessServer}" />
+                                    <MenuItem Command="{Binding AddVmessServerCmd}" Header="{x:Static resx:ResUI.menuAddVmessServer}" />
+                                    <MenuItem Command="{Binding AddShadowsocksServerCmd}" Header="{x:Static resx:ResUI.menuAddShadowsocksServer}" />
+                                    <MenuItem Command="{Binding AddTrojanServerCmd}" Header="{x:Static resx:ResUI.menuAddTrojanServer}" />
+                                    <MenuItem Command="{Binding AddHysteria2ServerCmd}" Header="{x:Static resx:ResUI.menuAddHysteria2Server}" />
+                                    <MenuItem Command="{Binding AddTuicServerCmd}" Header="{x:Static resx:ResUI.menuAddTuicServer}" />
+                                    <MenuItem Command="{Binding AddWireguardServerCmd}" Header="{x:Static resx:ResUI.menuAddWireguardServer}" />
+                                    <MenuItem Command="{Binding AddAnytlsServerCmd}" Header="{x:Static resx:ResUI.menuAddAnytlsServer}" />
+                                    <MenuItem Command="{Binding AddNaiveServerCmd}" Header="{x:Static resx:ResUI.menuAddNaiveServer}" />
+                                    <MenuItem Command="{Binding AddSocksServerCmd}" Header="{x:Static resx:ResUI.menuAddSocksServer}" />
+                                    <MenuItem Command="{Binding AddHttpServerCmd}" Header="{x:Static resx:ResUI.menuAddHttpServer}" />
+                                    <Separator />
+                                    <MenuItem Command="{Binding AddPolicyGroupServerCmd}" Header="{x:Static resx:ResUI.menuAddPolicyGroupServer}" />
+                                    <MenuItem Command="{Binding AddProxyChainServerCmd}" Header="{x:Static resx:ResUI.menuAddProxyChainServer}" />
+                                    <MenuItem Command="{Binding AddCustomServerCmd}" Header="{x:Static resx:ResUI.menuAddCustomServer}" />
+                                    <MenuItem Command="{Binding AddCustomOutboundServerCmd}" Header="{x:Static resx:ResUI.menuAddCustomOutboundServer}" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <c:LineIcon
+                                    Width="14"
+                                    Height="14"
+                                    Data="{DynamicResource I.Plus}"
+                                    StrokeThickness="2.2" />
+                                <TextBlock Text="{x:Static resx:ResUI.MacAddServer}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid>
+                    <ContentControl x:Name="pageDashboard" />
+                    <ContentControl
+                        x:Name="pageServers"
+                        Margin="22,0,22,20"
+                        Classes="page"
+                        IsVisible="False" />
+                    <ContentControl
+                        x:Name="pageProxies"
+                        Margin="22,0,22,20"
+                        Classes="page"
+                        IsVisible="False" />
+                    <ContentControl
+                        x:Name="pageConnections"
+                        Margin="22,0,22,20"
+                        Classes="page"
+                        IsVisible="False" />
+                    <Border
+                        x:Name="pageLogsHost"
+                        Margin="28,0,28,24"
+                        Padding="6"
+                        Classes="card"
+                        IsVisible="False">
+                        <ContentControl x:Name="pageLogs" Classes="page" />
+                    </Border>
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </dialogHost:DialogHost>
+</Window>

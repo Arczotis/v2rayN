@@ -105,6 +105,7 @@ public class CoreManager
         await CoreStartPreService(preContext);
 
         AppManager.Instance.RunningCoreType = preContext?.RunCoreType ?? mainContext.RunCoreType;
+        AppEvents.CoreStateChanged.Publish(true);
 
         if (_processService != null)
         {
@@ -157,6 +158,8 @@ public class CoreManager
     {
         try
         {
+            var wasRunning = _processService != null || _processPreService != null || _linuxSudo;
+
             if (_linuxSudo)
             {
                 await CoreAdminManager.Instance.KillProcessAsLinuxSudo();
@@ -175,6 +178,11 @@ public class CoreManager
                 await _processPreService.StopAsync();
                 _processPreService.Dispose();
                 _processPreService = null;
+            }
+
+            if (wasRunning)
+            {
+                AppEvents.CoreStateChanged.Publish(false);
             }
         }
         catch (Exception ex)
